@@ -130,7 +130,7 @@ ProgressBar.defaultProps = {
   value: 0,
   maxValue: 100,
 
-  barEasing: 'inOut',  
+  barEasing: 'inOut',
   barAnimationDuration: 500,
   backgroundAnimationDuration: 2500,
 
