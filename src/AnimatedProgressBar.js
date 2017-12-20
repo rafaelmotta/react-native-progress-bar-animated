@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
   View,
   Animated,
+  Easing,
 } from 'react-native';
 
 class ProgressBar extends React.Component {
@@ -44,6 +45,7 @@ class ProgressBar extends React.Component {
 
   animateWidth() {
     Animated.timing(this.widthAnimation, {
+      easing: Easing[this.props.barEasing],
       toValue: ((this.props.width * this.state.progress) / 100) - (this.props.borderWidth * 2),
       duration: this.props.barAnimationDuration,
     }).start();
@@ -94,6 +96,16 @@ ProgressBar.propTypes = {
   /**
    * Animations
    */
+  barEasing: PropTypes.oneOf([
+    'bounce',
+    'cubic',
+    'ease',
+    'inOut',
+    'ease',
+    'sin',
+    'linear',
+    'quad',
+  ]),
   barAnimationDuration: PropTypes.number,
   backgroundAnimationDuration: PropTypes.number,
 
@@ -118,6 +130,7 @@ ProgressBar.defaultProps = {
   value: 0,
   maxValue: 100,
 
+  barEasing: 'inOut',  
   barAnimationDuration: 500,
   backgroundAnimationDuration: 2500,
 

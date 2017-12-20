@@ -1,5 +1,5 @@
 {
-  "name": "react-native-animated-progress-bar",
+  "name": "react-native-progress-bar-animated",
   "version": "1.0.0",
   "description": "Simple, customizable and animated progress bar for React Native",
   "main": "index.js",
@@ -44,7 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rafaelmotta/react-native-animated-progress-bar.git"
+    "url": "git+https://github.com/rafaelmotta/react-native-progress-bar-animated.git"
   },
   "keywords": [
     "react",
@@ -55,7 +55,7 @@
   "author": "Rafael Michels Motta",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rafaelmotta/react-native-animated-progress-bar/issues"
+    "url": "https://github.com/rafaelmotta/react-native-progress-bar-animated/issues"
   },
-  "homepage": "https://github.com/rafaelmotta/react-native-animated-progress-bar#readme"
+  "homepage": "https://github.com/rafaelmotta/react-native-progress-bar-animated#readme"
 }
