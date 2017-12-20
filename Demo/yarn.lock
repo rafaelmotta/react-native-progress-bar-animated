@@ -4547,9 +4547,9 @@ react-native-maps@0.17.1:
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.17.1.tgz#ab2236341fd984dac8864202ae55331bc262f60c"
 
-react-native-progress-bar-animated@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-progress-bar-animated/-/react-native-progress-bar-animated-1.0.3.tgz#09c4e6e59661ef1cbf31bc215efb086c2a7dc247"
+react-native-progress-bar-animated@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-progress-bar-animated/-/react-native-progress-bar-animated-1.0.5.tgz#70bd85893be77e9bfd7bf4b17a0e024f1e0afda2"
   dependencies:
     prop-types "^15.6.0"
 
