@@ -11,25 +11,37 @@ class ProgressBar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.widthAnimation = new Animated.Value(0);
-    this.backgroundAnimation = new Animated.Value(0);
-
     this.state = {
       progress: props.value,
     };
+    
+    this.widthAnimation = new Animated.Value(0);
+    this.backgroundAnimation = new Animated.Value(0);
+    this.backgroundInterpolationValue = null;
+  }
+
+  componentDidMount() {
+    if(this.state.progress > 0) {
+      this.animateWidth();
+    }
   }
 
   componentWillReceiveProps(props) {
-    if (props.value >= 0 && props.value <= this.props.maxValue) {
-      this.setState({ progress: props.value }, () => {
-        if (this.state.progress === this.props.maxValue) {
-          // Callback after complete the progress
-          const callback = this.props.onComplete;
-          if (callback) {
-            setTimeout(callback, this.props.barAnimationDuration);
+    if (props.value !== this.state.progress) {
+      
+      if (props.value >= 0 && props.value <= this.props.maxValue) {
+        this.setState({ progress: props.value }, () => {;
+
+          if (this.state.progress === this.props.maxValue) {
+
+            // Callback after complete the progress
+            const callback = this.props.onComplete;
+            if (callback) {
+              setTimeout(callback, this.props.barAnimationDuration);
+            }
           }
-        }
-      });
+        });
+      }
     }
   }
 
@@ -37,8 +49,10 @@ class ProgressBar extends React.Component {
     if (this.props.value !== prevProps.value) {
       this.animateWidth();
 
-      if ((this.props.value === this.props.maxValue) && this.props.backgroundColorOnComplete) {
-        this.animateBackground();
+      if (this.props.backgroundColorOnComplete) {
+        if (this.props.value === this.props.maxValue) {
+          this.animateBackground();
+        }
       }
     }
   }
@@ -59,11 +73,13 @@ class ProgressBar extends React.Component {
   }
 
   render() {
-    const backgroundColor = this.backgroundAnimation.interpolate({
-      inputRange: [0, 1],
-      outputRange: [this.props.backgroundColor, this.props.backgroundColorOnComplete],
-    });
-
+    if(this.props.backgroundColorOnComplete) {
+      this.backgroundInterpolationValue = this.backgroundAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [this.props.backgroundColor, this.props.backgroundColorOnComplete],
+      });
+    }
+    
     return (
       <View style={{
         width: this.props.width,
@@ -76,7 +92,7 @@ class ProgressBar extends React.Component {
         <Animated.View style={{
           height: this.props.height - (this.props.borderWidth * 2),
           width: this.widthAnimation,
-          backgroundColor,
+          backgroundColor: this.backgroundInterpolationValue || this.props.backgroundColor,
           borderRadius: this.props.borderRadius,
         }}
         />
@@ -99,8 +115,6 @@ ProgressBar.propTypes = {
   barEasing: PropTypes.oneOf([
     'bounce',
     'cubic',
-    'ease',
-    'inOut',
     'ease',
     'sin',
     'linear',
@@ -130,7 +144,7 @@ ProgressBar.defaultProps = {
   value: 0,
   maxValue: 100,
 
-  barEasing: 'inOut',
+  barEasing: 'linear',
   barAnimationDuration: 500,
   backgroundAnimationDuration: 2500,
 

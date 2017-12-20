@@ -34,10 +34,9 @@ import {
   Dimensions,
   Button,
   Alert,
-  Text,
 } from 'react-native';
 
-import { ProgressBarAnimated } from 'react-native-progress-bar-animated';
+import ProgressBarAnimated from 'react-native-progress-bar-animated';
 
 export default class App extends React.Component {
 
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
 | --- | --- | --- | --- |
 | value | number | 0 | Progress value |
 | maxValue | number | 500 | Max percentage bar can have |
-| barEasing | string | 'inOut' | Easing animation type  |
+| barEasing | string | 'linear' | Easing animation type(bounce, cubic, ease, sin, linear, quad) |
 | barAnimationDuration | number | [] | Duration in ms of bar width animation |
 | backgroundAnimationDuration | number | null | Duration in ms of bar background color change |
 | width | number | REQUIRED | Width of bar |
