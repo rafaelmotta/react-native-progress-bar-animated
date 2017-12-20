@@ -12,6 +12,8 @@
 
 ## Demo
 
+You can try on expo: https://expo.io/@rafaelmotta021/react-native-progress-bar-animated-demo
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/rafaelmotta/react-native-progress-bar-animated/master/example.gif" height="550" />
 </p>
