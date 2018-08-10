@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
 | width | number | REQUIRED | Width of bar |
 | height | number | 15 | Height of bar |
 | backgroundColor | string | '#148cF0' | Color that will complete the bar |
+| underlyingColor | string | '#148cF0' | Color that underlies the bar |
 | backgroundColorOnComplete | string | null | Optional color that will overwrite background color when reach the max value prop |
 | borderWidth | number | 1 | Style prop |
 | borderColor | string | '#148cF0' | Style prop |
