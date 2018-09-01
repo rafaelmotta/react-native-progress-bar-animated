@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
 | backgroundAnimationDuration | number | null | Duration in ms of bar background color change |
 | width | number | '100%' | Width of bar |
 | height | number | 15 | Height of bar |
-| backgroundColor | string | '#148cF0' | Background color of the container (not the progress bar) |
+| backgroundColor | string | 'transparent' | Background color of the container (not the progress bar) |
 | progressBackgroundColor | string | '#148cF0' | Color that will complete the bar |
 | progressBackgroundColorOnComplete | string | null | Optional color that will overwrite background color when reach the max value prop |
 | borderWidth | number | 1 | Style prop |
