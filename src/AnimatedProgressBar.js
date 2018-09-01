@@ -1,28 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
 
-import {
-  View,
-  Animated,
-  Easing,
-} from 'react-native';
+import { View, Animated, Easing } from 'react-native'
 
 class ProgressBar extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
-      progress: props.value,
-    };
-    
-    this.widthAnimation = new Animated.Value(0);
-    this.backgroundAnimation = new Animated.Value(0);
-    this.backgroundInterpolationValue = null;
+      progress: props.value
+    }
+
+    this.widthAnimation = new Animated.Value(0)
+    this.backgroundAnimation = new Animated.Value(0)
+    this.backgroundInterpolationValue = null
   }
 
   componentDidMount() {
     if (this.state.progress > 0) {
-      this.animateWidth();
+      this.animateWidth()
     }
   }
 
@@ -32,112 +27,87 @@ class ProgressBar extends React.Component {
         this.setState({ progress: props.value }, () => {
           if (this.state.progress === this.props.maxValue) {
             // Callback after complete the progress
-            const callback = this.props.onComplete;
+            const callback = this.props.onComplete
             if (callback) {
-              setTimeout(callback, this.props.barAnimationDuration);
+              setTimeout(callback, this.props.barAnimationDuration)
             }
           }
-        });
+        })
       }
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.value !== prevProps.value) {
-      this.animateWidth();
+      this.animateWidth()
 
-      if (this.props.backgroundColorOnComplete) {
+      if (this.props.progressBackgroundColorOnComplete) {
         if (this.props.value === this.props.maxValue) {
-          this.animateBackground();
+          this.animateBackground()
         }
       }
     }
   }
 
   animateWidth() {
-    const toValue = ((this.props.width * this.state.progress) / 100) - this.props.borderWidth * 2;
+    const toValue = Math.max(
+      0,
+      Math.min(100, (this.state.progress / this.props.maxValue) * 100)
+    )
 
     Animated.timing(this.widthAnimation, {
       easing: Easing[this.props.barEasing],
-      toValue: toValue > 0 ? toValue : 0,
-      duration: this.props.barAnimationDuration,
-    }).start();
+      toValue: toValue,
+      duration: this.props.barAnimationDuration
+    }).start()
   }
 
   animateBackground() {
     Animated.timing(this.backgroundAnimation, {
       toValue: 1,
-      duration: this.props.backgroundAnimationDuration,
-    }).start();
+      duration: this.props.backgroundAnimationDuration
+    }).start()
   }
 
   render() {
-    if (this.props.backgroundColorOnComplete) {
+    if (this.props.progressBackgroundColorOnComplete) {
       this.backgroundInterpolationValue = this.backgroundAnimation.interpolate({
         inputRange: [0, 1],
-        outputRange: [this.props.backgroundColor, this.props.backgroundColorOnComplete],
-      });
+        outputRange: [
+          this.props.progressBackgroundColor,
+          this.props.progressBackgroundColorOnComplete
+        ]
+      })
     }
 
     return (
-      <View style={{
-        width: this.props.width,
-        height: this.props.height,
-        borderWidth: this.props.borderWidth,
-        borderColor: this.props.borderColor,
-        borderRadius: this.props.borderRadius,
-      }}
-      >
-        <Animated.View style={{
-          height: this.props.height - (this.props.borderWidth * 2),
-          width: this.widthAnimation,
-          backgroundColor: this.backgroundInterpolationValue || this.props.backgroundColor,
+      <View
+        style={{
+          width: this.props.width || '100%',
+          height: this.props.height,
+          borderWidth: this.props.borderWidth,
+          borderColor: this.props.borderColor,
           borderRadius: this.props.borderRadius,
+          backgroundColor: this.props.backgroundColor
         }}
+      >
+        <Animated.View
+          style={{
+            height: this.props.height - this.props.borderWidth * 2,
+            width: this.widthAnimation.interpolate({
+              inputRange: [0, 100],
+              outputRange: ['0%', '100%']
+            }),
+            backgroundColor:
+              this.backgroundInterpolationValue ||
+              this.props.progressBackgroundColor,
+            borderRadius: this.props.borderRadius
+          }}
         />
       </View>
-    );
+    )
   }
 }
-
-ProgressBar.propTypes = {
-
-  /**
-   * Bar values
-   */
-  value: PropTypes.number,
-  maxValue: PropTypes.number,
-
-  /**
-   * Animations
-   */
-  barEasing: PropTypes.oneOf([
-    'bounce',
-    'cubic',
-    'ease',
-    'sin',
-    'linear',
-    'quad',
-  ]),
-  barAnimationDuration: PropTypes.number,
-  backgroundAnimationDuration: PropTypes.number,
-
-  /**
-   * StyleSheet props
-   */
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number,
-  backgroundColor: PropTypes.string,
-  backgroundColorOnComplete: PropTypes.string,
-  borderWidth: PropTypes.number,
-  borderColor: PropTypes.string,
-  borderRadius: PropTypes.number,
-
-  /**
-   * Callbacks
-   */
-  onComplete: PropTypes.func,
-};
 
 ProgressBar.defaultProps = {
   value: 0,
@@ -149,14 +119,15 @@ ProgressBar.defaultProps = {
 
   height: 15,
 
-  backgroundColor: '#148cF0',
-  backgroundColorOnComplete: null,
+  backgroundColor: 'transparent',
+  progressBackgroundColor: '#148cF0',
+  progressBackgroundColorOnComplete: null,
 
   borderWidth: 1,
   borderColor: '#C8CCCE',
   borderRadius: 6,
 
-  onComplete: null,
-};
+  onComplete: null
+}
 
-export default ProgressBar;
+export default ProgressBar
