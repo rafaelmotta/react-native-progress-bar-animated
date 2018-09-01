@@ -56,7 +56,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    const barWidth = Dimensions.get('screen').width - 30;
     const progressCustomStyles = {
       backgroundColor: 'red', 
       borderRadius: 0,
@@ -68,7 +67,6 @@ export default class App extends React.Component {
         <View>
           <Text style={styles.label}>Bar with backgroundColorOnComplete prop</Text>
           <ProgressBarAnimated
-            width={barWidth}
             value={this.state.progress}
             backgroundColorOnComplete="#6CC644"
           />
@@ -85,7 +83,6 @@ export default class App extends React.Component {
         <View>
           <Text style={styles.label}>Bar with onComplete event</Text>
           <ProgressBarAnimated
-            width={barWidth}
             value={this.state.progressWithOnComplete}
             onComplete={() => {
               Alert.alert('Hey!', 'onComplete event fired!');
@@ -105,7 +102,6 @@ export default class App extends React.Component {
           <Text style={styles.label}>Custom style with max value in 30%</Text>
           <ProgressBarAnimated
             {...progressCustomStyles}
-            width={barWidth}
             maxValue={30}
             value={this.state.progressCustomized}
           />
@@ -152,14 +148,15 @@ const styles = StyleSheet.create({
 | Name | Type| Default | Description |
 | --- | --- | --- | --- |
 | value | number | 0 | Progress value |
-| maxValue | number | 500 | Max percentage bar can have |
+| maxValue | number | 100 | Max percentage bar can have |
 | barEasing | string | 'linear' | Easing animation type(bounce, cubic, ease, sin, linear, quad) |
 | barAnimationDuration | number | [] | Duration in ms of bar width animation |
 | backgroundAnimationDuration | number | null | Duration in ms of bar background color change |
-| width | number | REQUIRED | Width of bar |
+| width | number | '100%' | Width of bar |
 | height | number | 15 | Height of bar |
-| backgroundColor | string | '#148cF0' | Color that will complete the bar |
-| backgroundColorOnComplete | string | null | Optional color that will overwrite background color when reach the max value prop |
+| backgroundColor | string | '#148cF0' | Background color of the container (not the progress bar) |
+| progressBackgroundColor | string | '#148cF0' | Color that will complete the bar |
+| progressBackgroundColorOnComplete | string | null | Optional color that will overwrite background color when reach the max value prop |
 | borderWidth | number | 1 | Style prop |
 | borderColor | string | '#148cF0' | Style prop |
 | borderRadius | number | 6 | Style prop |
