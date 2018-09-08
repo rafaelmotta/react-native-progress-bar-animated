@@ -86,6 +86,7 @@ class ProgressBar extends React.Component {
         borderWidth: this.props.borderWidth,
         borderColor: this.props.borderColor,
         borderRadius: this.props.borderRadius,
+        backgroundColor: this.props.underlyingColor
       }}
       >
         <Animated.View style={{
