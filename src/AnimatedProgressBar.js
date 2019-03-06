@@ -133,6 +133,7 @@ ProgressBar.propTypes = {
   borderWidth: PropTypes.number,
   borderColor: PropTypes.string,
   borderRadius: PropTypes.number,
+  underlyingColor: PropTypes.string,
 
   /**
    * Callbacks
@@ -152,6 +153,7 @@ ProgressBar.defaultProps = {
 
   backgroundColor: '#148cF0',
   backgroundColorOnComplete: null,
+  underlyingColor: null,
 
   borderWidth: 1,
   borderColor: '#C8CCCE',
