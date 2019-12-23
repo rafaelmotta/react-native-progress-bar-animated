@@ -34,7 +34,7 @@ class ProgressBar extends React.Component {
             // Callback after complete the progress
             const callback = this.props.onComplete;
             if (callback) {
-              setTimeout(callback, this.props.barAnimationDuration);
+              setTimeout(callback, this.props.barAnimationDuration + this.props.barAnimationDelay);
             }
           }
         });
@@ -61,6 +61,7 @@ class ProgressBar extends React.Component {
       easing: Easing[this.props.barEasing],
       toValue: toValue > 0 ? toValue : 0,
       duration: this.props.barAnimationDuration,
+      delay: this.props.barAnimationDelay,
     }).start();
   }
 
@@ -68,6 +69,7 @@ class ProgressBar extends React.Component {
     Animated.timing(this.backgroundAnimation, {
       toValue: 1,
       duration: this.props.backgroundAnimationDuration,
+      delay: this.props.backgroundAnimationDelay,
     }).start();
   }
 
@@ -122,6 +124,8 @@ ProgressBar.propTypes = {
   ]),
   barAnimationDuration: PropTypes.number,
   backgroundAnimationDuration: PropTypes.number,
+  barAnimationDelay: PropTypes.number,
+  backgroundAnimationDelay: PropTypes.number,
 
   /**
    * StyleSheet props
@@ -147,6 +151,8 @@ ProgressBar.defaultProps = {
   barEasing: 'linear',
   barAnimationDuration: 500,
   backgroundAnimationDuration: 2500,
+  barAnimationDelay: 0,
+  backgroundAnimationDelay: 0,
 
   height: 15,
 
