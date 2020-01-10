@@ -86,7 +86,10 @@ class ProgressBar extends React.Component {
         borderWidth: this.props.borderWidth,
         borderColor: this.props.borderColor,
         borderRadius: this.props.borderRadius,
-        backgroundColor: this.props.underlyingColor
+        borderBottomLeftRadius: this.props.borderBottomLeftRadius,
+        borderBottomRightRadius: this.props.borderBottomRightRadius,
+        borderTopRightRadius: this.props.borderTopRightRadius,
+        borderTopLeftRadius: this.props.borderTopLeftRadius,
       }}
       >
         <Animated.View style={{
@@ -94,6 +97,10 @@ class ProgressBar extends React.Component {
           width: this.widthAnimation,
           backgroundColor: this.backgroundInterpolationValue || this.props.backgroundColor,
           borderRadius: this.props.borderRadius,
+          borderBottomLeftRadius: this.props.borderBottomLeftRadius,
+          borderBottomRightRadius: this.props.borderBottomRightRadius,
+          borderTopRightRadius: this.props.borderTopRightRadius,
+          borderTopLeftRadius: this.props.borderTopLeftRadius,
         }}
         />
       </View>
@@ -133,6 +140,10 @@ ProgressBar.propTypes = {
   borderWidth: PropTypes.number,
   borderColor: PropTypes.string,
   borderRadius: PropTypes.number,
+  borderBottomLeftRadius: PropTypes.number,
+  borderBottomRightRadius: PropTypes.number,
+  borderTopRightRadius: PropTypes.number,
+  borderTopLeftRadius: PropTypes.number,
 
   /**
    * Callbacks
