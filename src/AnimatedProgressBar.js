@@ -140,6 +140,10 @@ ProgressBar.propTypes = {
   borderWidth: PropTypes.number,
   borderColor: PropTypes.string,
   borderRadius: PropTypes.number,
+  borderBottomLeftRadius: PropTypes.number,
+  borderBottomRightRadius: PropTypes.number,
+  borderTopRightRadius: PropTypes.number,
+  borderTopLeftRadius: PropTypes.number,
 
   /**
    * Callbacks
