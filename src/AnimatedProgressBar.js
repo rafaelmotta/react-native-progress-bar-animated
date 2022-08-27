@@ -26,7 +26,7 @@ class ProgressBar extends React.Component {
     }
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     if (props.value !== this.state.progress) {
       if (props.value >= 0 && props.value <= this.props.maxValue) {
         this.setState({ progress: props.value }, () => {
@@ -61,6 +61,7 @@ class ProgressBar extends React.Component {
       easing: Easing[this.props.barEasing],
       toValue: toValue > 0 ? toValue : 0,
       duration: this.props.barAnimationDuration,
+      useNativeDriver: false,
     }).start();
   }
 
@@ -68,6 +69,7 @@ class ProgressBar extends React.Component {
     Animated.timing(this.backgroundAnimation, {
       toValue: 1,
       duration: this.props.backgroundAnimationDuration,
+      useNativeDriver: false,
     }).start();
   }
 
@@ -86,7 +88,7 @@ class ProgressBar extends React.Component {
         borderWidth: this.props.borderWidth,
         borderColor: this.props.borderColor,
         borderRadius: this.props.borderRadius,
-        backgroundColor: this.props.underlyingColor
+        backgroundColor: this.props.underlyingColor,
       }}
       >
         <Animated.View style={{
